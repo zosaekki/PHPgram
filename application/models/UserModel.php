@@ -9,7 +9,7 @@ class UserModel extends Model {
     public function insUser(&$param) {
         $sql = "INSERT INTO t_user
                 ( email, pw, nm ) 
-                VALUES 
+                VALUES
                 ( :email, :pw, :nm )";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":email", $param["email"]);
@@ -25,7 +25,7 @@ class UserModel extends Model {
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":email", $param["email"]);        
         $stmt->execute();
-        return $stmt->fech(PDO::FETCH_OBJ);
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
     
 }
