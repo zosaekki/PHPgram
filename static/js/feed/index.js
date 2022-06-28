@@ -38,23 +38,23 @@
 
                     const fData = new FormData();
                     for(let i=0; i<files.length; i++) {
-                        fData.append('imgs', files[i]);
+                        fData.append('imgs[]', files[i]);
                     }
                     fData.append('ctnt', body.querySelector('textarea').value);
                     fData.append('location', body.querySelector('input[type=text]').value);
 
-                    fetch('/feed/reg', {
+                    fetch('/feed/rest', {
                         method: 'post',
                         body: fData
                     }).then(res => res.json())
                         .then(myJson => {
+                            console.log(myJson);
+                            // const closeBtn = modal.querySelector('.btn-close');
+                            // closeBtn.click();
 
-                            const closeBtn = modal.querySelector('.btn-close');
-                            closeBtn.click();
-
-                            if(feedObj && myJson.result) {
-                                feedObj.refreshList();
-                            }
+                            // if(feedObj && myJson.result) {
+                            //     feedObj.refreshList();
+                            // }
                         });
                 });
             }
