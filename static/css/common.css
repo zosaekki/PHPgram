@@ -24,7 +24,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 .h30 { height: 30px; }
 .h40 { height: 40px; }
 .h100 { height: 100px; }
-.h150 { width: 150px; }
+.h150 { height: 150px; }
 .h300 { height: 300px; }
 .h600 { height: 600px; }
 .header { z-index: 10; border-bottom: 1px solid #dfdfdf; position: fixed; top:0; width: 100%; background-color: #fff; }
