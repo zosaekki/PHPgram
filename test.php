@@ -1,6 +1,5 @@
 <?php
-    require_once "application/utils/FileUtils.php";
+require_once "application/utils/FileUtils.php";
 
-    $result =  getRandomFileNm("asdfasdf.jpg");
-
-    print $result;
+$result = getRandomFileNm("asdasd.asdagfadgdsa.asf.jpeg");
+print "result : " . $result;

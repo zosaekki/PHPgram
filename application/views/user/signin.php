@@ -7,7 +7,7 @@
         <div class="err">
             <?php
                 if(isset($_GET["err"])) {
-                    print "로그인 실패";
+                    print "Id or Password is not correct.";
                 }
             ?>
         </div>

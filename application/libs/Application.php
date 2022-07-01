@@ -5,15 +5,13 @@ require_once "application/utils/UrlUtils.php";
 require_once "application/utils/SessionUtils.php";
 require_once "application/utils/FileUtils.php";
 
-
-
 class Application{
     
     public $controller;
     public $action;
     private static $modelList = [];
 
-    public function __construct() {        
+    public function __construct() {
         $urlPaths = getUrlPaths();
         $controller = isset($urlPaths[0]) && $urlPaths[0] != '' ? $urlPaths[0] : 'board';
         $action = isset($urlPaths[1]) && $urlPaths[1] != '' ? $urlPaths[1] : 'index';

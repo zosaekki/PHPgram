@@ -1,7 +1,7 @@
 <div class="header">
     <header class="container py-3">
         <div id="globalConst">
-            <div class="d-flex flex-column flex-md-row align-items-center">
+            <div class="d-flex flex-row align-items-center">
                 <div class="d-inline-flex flex-grow-1 flex-shrink-0">
                     <a href="/feed/index">
                         <img src="/static/svg/logo.svg">
@@ -26,7 +26,7 @@
                         <div class="d-inline-flex dropdown">
                             <a href="#" role="button" id="navDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" class="header_profile">
                                 <div class="circleimg h30 w30">
-                                    <img src="/static/img/profile/<?=getMainImgSrc()?>" onerror="this.onerror=null;this.src='/static/img/profile/defaultProfileImg_100.png'">
+                                    <img src="/static/img/profile/<?=getMainImgSrc()?>" onerror="this.onerror=null;this.src='/static/img/profile/sad.jpg'">
                                 </div>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navDropdownMenuLink">
@@ -47,17 +47,15 @@
     </header>
 </div>
 
-<!-- New Feed Create Modal -->
+<!-- New feed create modal -->
 <div class="modal fade" id="newFeedModal" tabindex="-1" aria-labelledby="newFeedModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content" id="newFeedModalContent">
             <div class="modal-header">
-                <h5 class="modal-title" id="newFeedModalLabel">새 게시물 만들기</h5>
+                <h5 class="modal-title" id="newFeedModalLabel">New feed post</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" id="id-modal-body">
-
-            </div>
+            <div class="modal-body" id="id-modal-body"></div>
         </div>
 
         <form class="d-none">
