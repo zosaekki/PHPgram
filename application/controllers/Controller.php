@@ -1,26 +1,24 @@
 <?php
 namespace application\controllers;
 
-class Controller {    
+class Controller {
+    protected $ctx;
     protected $model;
     private static $needLoginUrlArr = [
         "feed",
         "user/feedwin"
     ];
 
-    public function __construct($action, $model) {    
+    public function __construct($action, $model) {        
         if(!isset($_SESSION)) {
             session_start();
-        }    
+        }        
         $urlPaths = getUrl();
         foreach(static::$needLoginUrlArr as $url) {
             if(strpos( $urlPaths, $url) === 0 && !isset($_SESSION[_LOGINUSER]) ) {
-                // header("location:/user/signin");
-
-                //solve.
+                //echo "권한이 없습니다.";
+                //exit();
                 $this->getView("redirect:/user/signin");
-                // echo "권한이 없습니다.";
-                // exit();
             }
         }
 
@@ -33,12 +31,13 @@ class Controller {
 
         if(gettype($view) === "string") {
             require_once $this->getView($view);             
-        } else if(gettype($view) === "object" || gettype($view) === "array") {
+        } else if(gettype($view) === "object" || gettype($view) === "array") {            
             header("Content-Type:application/json");
             echo json_encode($view);
         }        
     }
-    private function chkLoginUrl() {
+    
+    protected function getModel($key) {
 
     }
     

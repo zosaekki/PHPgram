@@ -7,7 +7,7 @@ function getFeedList() {
     fetch('/feed/rest' + encodeQueryString(param))
     .then(res => res.json())
     .then(list => {                
-        feedObj.makeFeedList(list);                
+        feedObj.makeFeedList(list);
     })
     .catch(e => {
         console.error(e);

@@ -11,7 +11,7 @@ class Application{
     public $action;
     private static $modelList = [];
 
-    public function __construct() {
+    public function __construct() { // 생성자 함수
         $urlPaths = getUrlPaths();
         $controller = isset($urlPaths[0]) && $urlPaths[0] != '' ? $urlPaths[0] : 'board';
         $action = isset($urlPaths[1]) && $urlPaths[1] != '' ? $urlPaths[1] : 'index';
@@ -21,13 +21,16 @@ class Application{
             exit();
         }
 
-        if(!in_array($controller, static::$modelList)) {
-            $modelName = 'application\models\\' . $controller . 'model';
-            static::$modelList[$controller] = new $modelName();
-        }
-
         $controllerName = 'application\controllers\\' . $controller . 'controller';                
-        $model = static::$modelList[$controller];
+        $model = $this->getModel($controller);
         new $controllerName($action, $model);
+    }
+
+    public static function getModel($key) {
+        if(!in_array($key, static::$modelList)) {
+            $modelName = 'application\models\\' . $key . 'model';
+            static::$modelList[$key] = new $modelName();
+        }
+        return static::$modelList[$key];
     }
 }
