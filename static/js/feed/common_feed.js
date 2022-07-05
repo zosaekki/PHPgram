@@ -8,14 +8,14 @@ const feedObj = {
 
     makeCmtItem: function(item) {
         const divCmtItemContainer = document.createElement('div');
-        divCmtItemContainer.className = 'cmtItemCont';
-        let src = '/static/img/profile/' + (item.writerImg ? `${item.iuser}/${item.writerImg}` : 'defaultProfileImg.png');
+        divCmtItemContainer.className = 'd-flex flex-row align-items-center mb-2';
+        const src = '/static/img/profile/' + (item.writerimg ? `${item.iuser}/${item.writerimg}` : 'defaultProfileImg_100.png');
         divCmtItemContainer.innerHTML = `
-            <div class="cmtItemProfile">
-                <img src="${src}" class="profile w23 pointer">
+            <div class="circleimg h24 w24 me-1">
+                <img src="${src}" class="profile w24 pointer">                
             </div>
-            <div class="cmtItemCtnt">
-                <div class="pointer">${item.writer}</div>
+            <div class="d-flex flex-row">
+                <div class="pointer me-2">${item.writer} - ${getDateTimeInfo(item.regdt)}</div>
                 <div>${item.cmt}</div>
             </div>
         `;
@@ -174,7 +174,7 @@ const feedObj = {
 
                 const spanMoreCmt = document.createElement('span');
                 divMoreCmt.appendChild(spanMoreCmt);
-                spanMoreCmt.className = 'pointer';
+                spanMoreCmt.className = 'pointer rem0_9 c_lightgray';
                 spanMoreCmt.innerText = '댓글 더보기....';
                 spanMoreCmt.addEventListener('click', e => {
     
