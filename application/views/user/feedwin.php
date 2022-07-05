@@ -1,4 +1,4 @@
-<div id="gData" data-toiuser="<?=$this->data->iuser?>"></div>
+<div id="lData" data-toiuser="<?=$this->data->iuser?>"></div>
 <div class="d-flex flex-column align-items-center">
     <div class="size_box_100"></div>
     <div class="w100p_mw614">
@@ -42,7 +42,7 @@
                     }
                 ?>
                 <div class="d-flex flex-row">
-                    <div class="flex-grow-1">게시글  <span><?=$this->data->feedCnt?></span></div>
+                    <div class="flex-grow-1">게시글 <span><?=$this->data->feedCnt?></span></div>
                     <div class="flex-grow-1">팔로워 <span><?=$this->data->follower?></span></div>
                     <div class="flex-grow-1">팔로우 <span><?=$this->data->following?></span></div>
                 </div>
