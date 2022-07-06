@@ -1,5 +1,12 @@
-const url = new URL(location.href);
+if(feedObj) {
+    const url = new URL(location.href);
+    feedObj.iuser = parseInt(url.searchParams.get('iuser'));
+    feedObj.getFeedUrl = '/user/feed';
+    feedObj.getFeedList();
+}
 
+
+/*
 function getFeedList() {
     if(!feedObj) { return; }
     feedObj.showLoading();            
@@ -18,10 +25,14 @@ function getFeedList() {
     });
 }
 getFeedList();
+*/
+
 
 (function() {
     const lData = document.querySelector('#lData');
     const btnFollow = document.querySelector('#btnFollow');
+    const btnDelCurrentProfilePic = document.querySelector('#delCurrentProfilePic');
+    const btnProfileImgModalClose = document.querySelector('#btnProfileImgModalClose');
 
     const spanFollow = document.querySelector('#spanFollow');
     let followNum = parseInt(spanFollow.innerText);
@@ -73,5 +84,21 @@ getFeedList();
                     break;
             }
         });
+    }
+
+    if(btnDelCurrentProfilePic) {
+        btnDelCurrentProfilePic.addEventListener('click', e => {
+            fetch('/user/profile', {method: 'DELETE'})
+            .then(res => res.json())
+            .then(res => {
+                if(res.result) {
+                    const profileImgList = document.querySelectorAll('.profileimg');
+                    profileImgList.forEach(item => {
+                        item.src = '/static/img/profile/defaultProfileImg.png';
+                    })
+                    btnProfileImgModalClose.click();
+                }
+            })
+        })
     }
 })();

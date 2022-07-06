@@ -58,7 +58,7 @@ class UserController extends Controller {
         $this->addAttribute(_DATA, $this->model->selUserProfile($param));
         
         $this->addAttribute(_JS, ["user/feedwin", "https://unpkg.com/swiper@8/swiper-bundle.min.js"]);
-        $this->addAttribute(_CSS, ["feed/index", "user/feedwin", "https://unpkg.com/swiper@8/swiper-bundle.min.css"]);        
+        $this->addAttribute(_CSS, ["user/feedwin", "https://unpkg.com/swiper@8/swiper-bundle.min.css", "feed/index"]);        
         $this->addAttribute(_MAIN, $this->getView("user/feedwin.php"));
         return "template/t1.php"; 
     }
@@ -79,6 +79,7 @@ class UserController extends Controller {
             foreach($list as $item) {                 
                 $param2 = [ "ifeed" => $item->ifeed ];
                 $item->imgList = Application::getModel("feed")->selFeedImgList($param2);
+                $item->cmt = Application::getModel("feedcmt")->selFeedCmt($param2);
             }
             return $list;
         }
@@ -91,13 +92,31 @@ class UserController extends Controller {
         ];
 
         switch(getMethod()) {
-            case _POST:                                
+            case _POST:
                 $json = getJson();
                 $param["toiuser"] = $json["toiuser"];
                 return [_RESULT => $this->model->insUserFollow($param)];
             case _DELETE:        
                 $param["toiuser"] = $_GET["toiuser"];
                 return [_RESULT => $this->model->delUserFollow($param)];
+        }
+    }
+
+    public function profile() {
+        switch(getMethod()) {
+            case _DELETE:
+                $loginUser = getLoginUser();
+                if($loginUser) {
+                    $path = "static/img/profile/{$loginUser->iuser}/{$loginUser->mainimg}";
+                    if(file_exists($path) && unlink($path)) {
+                        $param = [ "iuser" => $loginUser->iuser, "delMainImg" => 1];
+                        if($this->model->updUser($param)) {
+                            $loginUser->mainimg = null;
+                            return [_RESULT => 1];
+                        }
+                    }
+                }
+                return [_RESULT => 0];
         }
     }
 }
