@@ -21,8 +21,11 @@ getFeedList();
 
 (function() {
     const lData = document.querySelector('#lData');
-
     const btnFollow = document.querySelector('#btnFollow');
+
+    const spanFollow = document.querySelector('#spanFollow');
+    let followNum = parseInt(spanFollow.innerText);
+
     if(btnFollow) {
         btnFollow.addEventListener('click', function() {
             const param = {
@@ -43,11 +46,11 @@ getFeedList();
                             btnFollow.classList.add('btn-primary');
                             if(btnFollow.dataset.youme === '1') {
                                 btnFollow.innerText = '맞팔로우';
-                                
                             } else {
                                 btnFollow.innerText = '팔로우';
-
                             }
+                            followNum = followNum - 1;
+                            spanFollow.innerText = followNum;
                         }
                     });
                     break;
@@ -63,6 +66,8 @@ getFeedList();
                         btnFollow.classList.remove('btn-primary');
                         btnFollow.classList.add('btn-outline-secondary');
                         btnFollow.innerText = '팔로우 취소';
+                        followNum = followNum + 1;
+                        spanFollow.innerText = followNum;
                     }
                 });
                     break;
