@@ -32,7 +32,10 @@ getFeedList();
     const lData = document.querySelector('#lData');
     const btnFollow = document.querySelector('#btnFollow');
     const btnDelCurrentProfilePic = document.querySelector('#delCurrentProfilePic');
-    const btnProfileImgModalClose = document.querySelector('#btnProfileImgModalClose');
+    const btnProfileImgModalClose = document.querySelector('#btnProfileImgModalClose');  
+    const btnUpdCurrentProfilePic = document.querySelector('#updCurrentProfilePic');
+    const formProfileImg = document.querySelector('#modalProfileImg');
+
 
     const spanFollow = document.querySelector('#spanFollow');
     let followNum = parseInt(spanFollow.innerText);
@@ -100,5 +103,34 @@ getFeedList();
                 }
             })
         })
+    }
+
+    if(btnUpdCurrentProfilePic) {
+        btnUpdCurrentProfilePic.addEventListener('click', e => {
+            formProfileImg.imgs.click();
+        })
+
+        formProfileImg.imgs.addEventListener('change', e => {
+            console.log(e.target.files.length);
+            if(e.target.files.length){
+                const fData = new FormData();
+                fData.append('profileImg', e.target.files[0]);
+                fetch('/user/profile', {
+                    method: 'post',
+                    body: fData
+                })
+                .then(res => res.json())
+                .then(res => {
+                    if(res.result){
+                        const gData = document.querySelector('#gData');
+                        const profileImgList = document.querySelectorAll('.profileimg');
+                        profileImgList.forEach(item => {
+                            item.src = `/static/img/profile/${gData.dataset.loginiuser}/${res.fileNm}`;
+                        });
+                        btnProfileImgModalClose.click();
+                    }
+                });
+            }
+        });
     }
 })();

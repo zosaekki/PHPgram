@@ -19,9 +19,9 @@
 
         public function selFeedCmt(&$param) {
             $sql = "SELECT G.*, COUNT(G.icmt) - 1 AS ismore
-                FROM (
-                    SELECT A.icmt, A.cmt, A.regdt, A.ifeed
-                            ,B.iuser, B.nm AS writer, B.mainimg AS writerimg
+                    FROM (
+                        SELECT A.icmt, A.cmt, A.regdt, A.ifeed
+                               , B.iuser, B.nm AS writer, B.mainimg AS writerimg
                     FROM t_feed_cmt A
                     INNER JOIN t_user B
                     ON A.iuser = B.iuser

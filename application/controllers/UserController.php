@@ -117,6 +117,37 @@ class UserController extends Controller {
                     }
                 }
                 return [_RESULT => 0];
+
+                case _POST:
+                    if(!isset($_FILES["profileImg"])){
+                        return [_RESULT => 0];
+                    }
+    
+                    $loginUser = getLoginUser();
+                    if($loginUser){
+                        $path = "static/img/profile/{$loginUser->iuser}";
+                        if(!is_dir($path)){
+                            mkdir($path, 0777, true);
+                        }
+                        if($loginUser->mainimg){
+                            $savedImg = $path . "/" . $loginUser->mainimg;
+                            if(file_exists($savedImg)){
+                                unlink($savedImg);
+                            }
+                        }
+    
+                        $tempName = $_FILES["profileImg"]["tmp_name"];
+                        $randomFileNm = getRandomFileNm($_FILES["profileImg"]["name"]);
+                        $param = [
+                            "iuser" => $loginUser->iuser,
+                            "mainimg" => $randomFileNm
+                        ];
+                        if(move_uploaded_file($tempName, $path . "/" . $randomFileNm)){
+                            $this->model->updUser($param);
+                            $loginUser->mainimg = $randomFileNm;
+                            return [_RESULT => 1, "fileNm" => $randomFileNm];
+                        }
+                    }
+            }
         }
     }
-}

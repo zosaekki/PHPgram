@@ -68,15 +68,14 @@
                 <h5 class="modal-title text-center" id="newFeedModalLabel">프로필 사진 바꾸기</h5>
             </div>
             <div class="modal-body" id="id-modal-body">
-                <span class="text-primary bg-white pointer">사진 업로드</span>
+                <span id="updCurrentProfilePic" class="text-primary bg-white pointer">사진 업로드</span>
                 <hr>
                 <span id="delCurrentProfilePic" class="text-danger bg-white pointer">현재 사진 삭제</span>
                 <hr>
                 <span class="text-muted bg-white pointer" id="btnProfileImgModalClose" data-bs-dismiss="modal">취소</span>
             </div>
         </div>
-
-        <form class="d-none">
+        <form class="d-none" id="modalProfileImg">
             <input type="file" accept="image/*" name="imgs" multiple>
         </form>
     </div>
